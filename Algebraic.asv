@@ -1,0 +1,25 @@
+function R = Algebraic(nume, d)
+	%inceputul este ca cel al functiei Iterative
+    nodes = 0;
+    fid = fopen(nume, 'r');
+    nodes = fscanf(fid, "%d", 1);
+    A = zeros(nodes, nodes);
+      
+    for i = 1:nodes
+      nod1 = fscanf(fid, "%d", 1);
+      nrnoduri = fscanf(fid, "%d", 1);
+      for j = 1:nrnoduri
+        nod2 = fscanf(fid, "%d", 1);
+        A(nod2, nod1) = 1;
+      end
+      A(i, i) = 0;
+    end
+    val1 = fscanf(fid, "%f", 1);
+    val2 = fscanf(fid, "%f", 2);
+    fclose(fid);
+    
+    %formula algebrica este
+    %R = d * A * R + C
+    %se transforma in (I - d * A) * R = X
+    %deci R = (I - d * A)
+end
